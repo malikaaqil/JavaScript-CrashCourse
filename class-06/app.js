@@ -26,18 +26,29 @@
 // Array of Objects
 
 
-let students = [];
+let getStudents = localStorage.getItem("studentsData");
+let students = getStudents ? JSON.parse(getStudents) : [];
+
+
 function addStudents() {
+
     let student = {
         name: prompt("Enter your name: "),
-        studentID: +prompt("Enter your Student ID: "),
+        studentID: +prompt("Enter ID: "),
         className: prompt("Enter your class name: ")
     }
     students.push(student);
+
+    let stringify = JSON.stringify(students);
+    localStorage.setItem("studentsData", stringify);
+
     console.log(students);
+
+    for (let i = 0; i < students.length; i++) {
+        console.log(`
+        ${i}: Student Name: ${students[i]["name"]},
+        ID: ${students[i]["studentID"]},
+        Class Name: ${students[i]["className"]}
+        `);
+    }
 }
-
-
-
-
-
